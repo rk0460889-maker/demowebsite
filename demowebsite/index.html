@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ProShop</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="script.js">
+</head>
+
+<body>
+    
+
+<nav class="navbar">
+  <div class="logo">Dikota</div>
+
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+
+    <li class="dropdown">
+      <a href="#">Categories ▼</a>
+      <div class="dropdown-menu">
+        <a href="#">Electronics</a>
+        <a href="#">Fashion</a>
+        <a href="#">Shoes</a>
+        <a href="#">Accessories</a>
+      </div>
+    </li>
+
+    <li><a href="#">Contact Us</a></li>
+  </ul>
+
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search products...">
+    <button onclick="searchProduct()">Search</button>
+  </div>
+
+  <div class="cart" onclick="addToCart()">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </div>
+
+  <div class="auth-buttons">
+    <button class="login">Login</button>
+    <button class="register">Register</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Welcome to DikotaShop</h1>
+  <p>Discover Amazing Products at Best Prices</p>
+  <button>Shop Now</button>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories">
+  <h2>Shop by Category</h2>
+  <div class="category-container" id="categoryContainer"></div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products">
+  <h2>Featured Products</h2>
+  <div class="product-container" id="productContainer"></div>
+</section>
+
+<!-- DEAL -->
+<section class="deal">
+  <h2>Deal of the Day</h2>
+  <p>Offer Ends In:</p>
+  <div id="countdown"></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2>Customer Reviews</h2>
+  <div class="testimonial-container">
+    <div class="testimonial">"Amazing quality products!"</div>
+    <div class="testimonial">"Fast shipping & great support."</div>
+    <div class="testimonial">"Best online store experience."</div>
+  </div>
+</section>
+
+<script>
+
+/* DYNAMIC CATEGORIES */
+const categories = ["Electronics","Fashion","Shoes","Watches","Accessories"];
+
+const categoryContainer = document.getElementById("categoryContainer");
+
+categories.forEach(cat=>{
+  const div = document.createElement("div");
+  div.classList.add("category-card");
+  div.innerText = cat;
+  categoryContainer.appendChild(div);
+});
+
+
+/* DYNAMIC PRODUCTS */
+const products = [
+  {
+    name:"Smart Watch",
+    price:"$99",
+    img:"https://via.placeholder.com/250"
+  },
+  {
+    name:"Headphones",
+    price:"$149",
+    img:"https://via.placeholder.com/250"
+  },
+  {
+    name:"Sneakers",
+    price:"$79",
+    img:"https://via.placeholder.com/250"
+  },
+  {
+    name:"Backpack",
+    price:"$59",
+    img:"https://via.placeholder.com/250"
+  }
+];
+
+const productContainer = document.getElementById("productContainer");
+
+products.forEach(product=>{
+  const card = document.createElement("div");
+  card.classList.add("product-card");
+
+  card.innerHTML = `
+    <img src="${product.img}">
+    <h3>${product.name}</h3>
+    <p>${product.price}</p>
+    <button onclick="addToCart()">Add to Cart</button>
+  `;
+
+  productContainer.appendChild(card);
+});
+
+
+/* ADD TO CART FUNCTION */
+let cartCount = 0;
+function addToCart(){
+  cartCount++;
+  alert("Product added to cart! Total: " + cartCount);
+}
+
+
+/* COUNTDOWN TIMER */
+let time = 86400; // 24 hours
+
+const countdown = document.getElementById("countdown");
+
+setInterval(()=>{
+  let hours = Math.floor(time / 3600);
+  let minutes = Math.floor((time % 3600) / 60);
+  let seconds = time % 60;
+
+  countdown.innerText = `${hours}h ${minutes}m ${seconds}s`;
+  time--;
+
+  if(time <= 0){
+    countdown.innerText = "Offer Expired!";
+  }
+
+},1000);
+
+</script> 
+
+
+
+<section class="hero">
+  <div class="hero-content">
+    <h1>Big Sale 50% Off</h1>
+    <p>Discover the latest trends & exclusive deals</p>
+    <button>Shop Now</button>
+  </div>
+</section>
+
+<!-- Animated Ads Banner -->
+<section class="ads-section">
+  <div class="ads-slider" id="adsSlider">
+    <div class="ad">🔥 Flash Sale – Limited Time!</div>
+    <div class="ad">🚚 Free Shipping Over $99</div>
+    <div class="ad">🎁 Buy 1 Get 1 Free Today</div>
+  </div>
+</section>
+
+ 
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <h2>Subscribe for Updates</h2>
+  <input type="email" placeholder="Enter your email">
+  <button>Subscribe</button>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <h3>DikotaShop</h3>
+      <p>Your trusted online store for quality products.</p>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li>Home</li>
+        <li>About</li>
+        <li>Shop</li>
+        <li>Contact</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Customer Service</h4>
+      <ul>
+        <li>FAQ</li>
+        <li>Returns</li>
+        <li>Privacy Policy</li>
+        <li>Terms & Conditions</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Follow Us</h4>
+      <p>Facebook | Instagram | Twitter</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 DikotaShop. All Rights Reserved.
+  </div>
+</footer>
+
+
+
+
+
+
+
+</body>
+</html>
